@@ -1,21 +1,32 @@
-\documentclass[10pt,a4paper,draft]{report}
+\documentclass[11pt,a4paper]{report}
 \usepackage[hmargin=1.25in,vmargin=1in]{geometry}
+\usepackage{amsthm}
+\newtheorem*{remark}{Remark}
 
-%opening
+
 \title{The Solution of Model Predictive Control: Theory, Computation, and Design}
-\author{}
+\author{lixc21}
 \date{\today}
 
 \begin{document}
-
 \maketitle
 
 \chapter{Getting Started with Model Predictive Control}
 \section{Brief Review}
-\paragraph{}
-s
+In this section, we just consider state space linear time invariant system with zero steady state.
 
+\paragraph{Lemma 1.3} (LQR convergence). For $(A,B)$ controllable, the infinite LQR gives a convergent closed-loop system.
+\begin{proof}
+Because $(A,B)$ is controllable, there exists a sequence of $n$ inputs that transfers the state to zero. When $k>n$, we let $u=0$, then the objective function $V(x,u)=\sum_{k=0}^\infty x_k^\top Qx_k+u^\top Ru$ is finite, which implies the optimization problem is feasible. On the other hand, the solution is unique since $R>0$ and the objective function is strict convex with $u$.
 
-\section{systems Models Collection}
+So the solution of the LQR problem exists and is unique. This imples to that the objective funtion is non-increasing with time, and we have $x\to 0$, $u\to 0$ as $k\to 0$.
+\end{proof}
+\begin{remark}
+The optimal solution can be calculate from Riccati equation, which is from backward dynamic programming similar to Kalman filter.
+% \begin{equ}
+\end{remark}
+
+\section{The Solution of Exercises}
 
 \end{document}
+{}
