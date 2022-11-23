@@ -1,6 +1,8 @@
 \documentclass[11pt,a4paper]{report}
 \usepackage[hmargin=1.25in,vmargin=1in]{geometry}
 \usepackage{amsthm}
+\usepackage{cite,url,amsmath,amssymb,bm}
+\usepackage{algorithm,graphicx,color}
 \newtheorem*{remark}{Remark}
 
 
@@ -23,7 +25,12 @@ So the solution of the LQR problem exists and is unique. This imples to that the
 \end{proof}
 \begin{remark}
 The optimal solution can be calculate from Riccati equation, which is from backward dynamic programming similar to Kalman filter.
-% \begin{equ}
+\begin{equation}\notag
+\begin{aligned}
+K&=-(B^\top PB+R)^{-1} B^\top PA\\
+P&=Q+A^\top PA-A^\top PB(B^\top PB+R)^{-1}B^\top PA
+\end{aligned}
+\end{equation}
 \end{remark}
 
 \section{The Solution of Exercises}
