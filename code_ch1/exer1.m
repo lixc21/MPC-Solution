@@ -7,10 +7,14 @@
 % Last modified date 11/25/2022
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%% init
-x=[1 0 0]';
+% calculate
 k1=2;
 k2=1;
 A=[-k1 0 0; k1 -k2 0; 0 k2 0];
-for
-ode45
+[t,y] = ode45(@(t,x) A*x, [0 5], [1 0 0]');
+
+% plot
+plot(t,y)
+legend(["x_1","x_2","x_3"])
+xlabel("t")
+saveas(gcf, 'exer1.pdf')
