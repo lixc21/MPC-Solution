@@ -38,9 +38,19 @@ P&=Q+A^\top PA-A^\top PB(B^\top PB+R)^{-1}B^\top PA
 
 \section{The Solution of Exercises}
 \begin{exercise} State space form for chemical reaction model.\\
-
-
-
+Consider the following chemical reaction kinetics for a two-step series reaction
+\begin{equation}
+    A\xrightarrow{k_1} B\qquad B\xrightarrow{k_2} C
+\end{equation}
+We wish to follow the reaction in a constant volume, well-mixed, batch reactor. As taught in the undergraduate chemical engineering curriculum, we proceed by writing material balances for the three species giving
+\begin{equation}
+    \dv{c_A}{t}=-r_1\qquad \dv{c_B}{t}=r_1-r_2\qquad \dv{c_C}{t}=r_2
+\end{equation}
+in which $c_j$ is the concentration of species $j$, and $r_1$ and $r_2$ are the rates $\rm (mol/(time\cdot vol))$ at which the two reactions occur. We then assume some rate law for the reaction kinetics, such as
+\begin{equation}
+    r_1=k_1 c_A\qquad r_2=k_2 c_B
+\end{equation}
+We substitute the rate laws into the material balances and specify the starting concentrations to produce three differentia equations for the three species concentrations. 
 \end{exercise}
 
 
@@ -48,6 +58,7 @@ P&=Q+A^\top PA-A^\top PB(B^\top PB+R)^{-1}B^\top PA
 Since the mathematical background is basic, we jump to the exercises section.
 \section{The solution of Exercises}
 \begin{exercise} Norms in $\mathbb{R}^n$\\
+Show that the following three functions are all norms in $\mathbb{R}^n$
 
 \begin{equation}\notag
     \|x\|_2 
