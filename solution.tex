@@ -1,13 +1,12 @@
 \documentclass[11pt,a4paper]{report}
 \usepackage[hmargin=1.25in,vmargin=1in]{geometry}
-\usepackage{amsthm}
-\usepackage{cite,url,amsmath,amssymb,bm}
+\usepackage{amsthm,cite,url,amsmath,amssymb,bm}
 \usepackage{algorithm,graphicx,color,mathtools}
 \usepackage{physics,enumitem,thmtools}
-\usepackage{hyperref}
+\usepackage{hyperref,tikz}
 
 
-\title{The Solution of Model Predictive Control: Theory, Computation, and Design}
+\title{The Solution of Model Predictive Control: Theory, Computation, and Design \cite{knuth}}
 \author{lixc21}
 \date{\today}
 
@@ -85,18 +84,67 @@ We substitute the rate laws into the material balances and specify the starting 
     \end{equation}
     where $x=[c_A,\ c_B,\ c_C]^\top$. $B$ does not exist because there is no system input variables. $C=[1,\ 0,\ 0]^\top$, $D=0$, $y=Cx$.
     
-    \item the simulation result is shown as Fig.\ref{figans1}. The code used in all of the exercise can be found in github \url{https://github.com/lixc21/MPC-Solution}.
+    \item the simulation result is shown as Fig.\ref{fig:exer1}. The code used in all of the exercise can be found in github \url{https://github.com/lixc21/MPC-Solution}.
 \end{enumerate}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\linewidth/2]{./code_ch1/exer1.pdf}
     \caption{system simulation}
-    \label{figans1}
+    \label{fig:exer1}
 \end{figure}
 \end{answer}
 
-\begin{exercise}
-    
+\begin{exercise} Distributed systems and time delay.\\
+We assume familiarity with the transfer function of a time delay from an undergraduate systems course
+\begin{equation}
+    \pdv{c_j}{t}=-\nabla \cdot (c_j v_j)+R_j
+\end{equation}
+Let's see the connection between the delay and the distributed systems, which give rise to it. A simple physical example of a time delay caused by transport in a flowing system. Consider plug flow in a tube depicted in Fig.\ref{fig:exer2}
+
+
+
+
+
+\begin{figure}
+\centering
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+%uncomment if require: \path (0,185); %set diagram left start at 0, and has height of 185
+
+%Shape: Ellipse [id:dp19295851654284357] 
+\draw   (272,42) .. controls (283.05,42) and (292,57.67) .. (292,77) .. controls (292,96.33) and (283.05,112) .. (272,112) .. controls (260.95,112) and (252,96.33) .. (252,77) .. controls (252,57.67) and (260.95,42) .. (272,42) -- cycle ;
+%Straight Lines [id:da7486939098222503] 
+\draw    (272,42) -- (399.44,42) ;
+%Straight Lines [id:da3129886311233703] 
+\draw    (272,112) -- (399.44,112) ;
+%Shape: Arc [id:dp1273018290846848] 
+\draw  [draw opacity=0] (399.44,42) .. controls (399.44,42) and (399.44,42) .. (399.44,42) .. controls (399.44,42) and (399.44,42) .. (399.44,42) .. controls (410.49,42) and (419.44,57.67) .. (419.44,77) .. controls (419.44,96.33) and (410.49,112) .. (399.44,112) -- (399.44,77) -- cycle ; \draw   (399.44,42) .. controls (399.44,42) and (399.44,42) .. (399.44,42) .. controls (399.44,42) and (399.44,42) .. (399.44,42) .. controls (410.49,42) and (419.44,57.67) .. (419.44,77) .. controls (419.44,96.33) and (410.49,112) .. (399.44,112) ;  
+%Straight Lines [id:da8609030882922339] 
+\draw    (123,76.67) -- (237.44,77.32) ;
+\draw [shift={(239.44,77.33)}, rotate = 180.33] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+%Straight Lines [id:da8626778179325296] 
+\draw    (437.44,77.33) -- (536.11,77.33) ;
+\draw [shift={(538.11,77.33)}, rotate = 180] [color={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.75]    (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29)   ;
+
+% Text Node
+\draw (124,41.4) node [anchor=north west][inner sep=0.75pt]    {$c_{j} \ ( 0,t) =u( t)$};
+% Text Node
+\draw (124,84.4) node [anchor=north west][inner sep=0.75pt]    {$v$};
+% Text Node
+\draw (252,118.4) node [anchor=north west][inner sep=0.75pt]    {$z=0$};
+% Text Node
+\draw (390,123.4) node [anchor=north west][inner sep=0.75pt]    {$z=L$};
+% Text Node
+\draw (439,41.4) node [anchor=north west][inner sep=0.75pt]    {$c_{j} \ ( 0,t) =y( t)$};
+\end{tikzpicture}
+\caption{system simulation}
+\label{fig:exer2}
+\end{figure}
+
+
+
+
 \end{exercise}
 
 
@@ -127,11 +175,10 @@ Show that the following three functions are all norms in $\mathbb{R}^n$
 
 \end{exercise}
 
+\bibliographystyle{unsrt}
+\bibliography{mybib}
 
 \end{document}
-
-
-
 
 
 
