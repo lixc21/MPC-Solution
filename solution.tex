@@ -6,7 +6,7 @@
 \usepackage{hyperref,tikz}
 
 
-\title{The Solution of Model Predictive Control: Theory, Computation, and Design \cite{knuth}}
+\title{The Solution of Model Predictive Control: Theory, Computation, and Design \cite{rawlings2017model}}
 \author{lixc21}
 \date{\today}
 
@@ -97,18 +97,13 @@ We substitute the rate laws into the material balances and specify the starting 
 \begin{exercise} Distributed systems and time delay.\\
 We assume familiarity with the transfer function of a time delay from an undergraduate systems course
 \begin{equation}
-    \pdv{c_j}{t}=-\nabla \cdot (c_j v_j)+R_j
+    \bar{y}(s)=e^{-\theta s}\bar{u}(s)
 \end{equation}
-Let's see the connection between the delay and the distributed systems, which give rise to it. A simple physical example of a time delay caused by transport in a flowing system. Consider plug flow in a tube depicted in Fig.\ref{fig:exer2}
-
-
-
-
+Let's see the connection between the delay and the distributed systems, which give rise to it. A simple physical example of a time delay caused by transport in a flowing system. Consider plug flow in a tube depicted in Fig.\ref{fig:exer2}.
 
 \begin{figure}
 \centering
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
-
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
 %uncomment if require: \path (0,185); %set diagram left start at 0, and has height of 185
 
@@ -138,11 +133,33 @@ Let's see the connection between the delay and the distributed systems, which gi
 % Text Node
 \draw (439,41.4) node [anchor=north west][inner sep=0.75pt]    {$c_{j} \ ( 0,t) =y( t)$};
 \end{tikzpicture}
-\caption{system simulation}
+\caption{Plug-flow reactor}
 \label{fig:exer2}
 \end{figure}
 
+\begin{enumerate}[label=(\alph*)]
+    \item Write down the equation of change for moles of component $j$ for an arbitrary volume element and show that
+    \begin{equation}
+        \pdv{c_j}{t}=-\nabla \cdot (c_j v_j)+R_j
+    \end{equation}
+    in which $c_j$ is the molar concentration of component $j$, $v_j$ is the velocity of component $j$, and $R_j$ is the production rate of component $j$ due to chemical reaction.
 
+    Plug flow means the fluid velocity of all components os purely in the $z$ direction, and os independent of $r$ and $\theta$ and, we assume here, z
+    \begin{equation}
+        v_j=v\delta_z
+    \end{equation}
+    \item Assuming plug flow and neglecting chemical reaction in the tube, show that the equation of change reduces to 
+    \begin{equation}
+        \pdv{c_j}{t}=-v\pdv{c_j}{z}
+    \end{equation}
+    This equation is known as a hyperbolic, first-order partial differential equation.
+    \begin{alignat}{3}
+        &c_j(z,t)=u(t) &&0=z &&t\ge 0  \\
+        &c_j(z,t)=c_{j0}(t) \quad &&0\le z\le L\quad &&t=0 
+    \end{alignat}
+    In other words, we are using the feed concentration as the manipulated bariable, 
+
+\end{enumerate}
 
 
 \end{exercise}
