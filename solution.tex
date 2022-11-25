@@ -3,16 +3,30 @@
 \usepackage{amsthm}
 \usepackage{cite,url,amsmath,amssymb,bm}
 \usepackage{algorithm,graphicx,color,mathtools}
-\usepackage{physics}
+\usepackage{physics,enumitem,thmtools}
+
+
 
 \title{The Solution of Model Predictive Control: Theory, Computation, and Design}
 \author{lixc21}
 \date{\today}
 
-\begin{document}
+
+
 \newtheorem*{remark}{Remark}
 \theoremstyle{definition}\newtheorem{exercise}{Exercise}[chapter]
+\declaretheoremstyle[
+  headfont=\color{blue}\normalfont\bfseries,
+  bodyfont=\color{blue}\normalfont\rmshape,
+]{colored}
+\declaretheorem[
+  style=colored,
+  name=Answer,
+]{answer}
 
+
+
+\begin{document}
 \maketitle
 
 \chapter{Getting Started with Model Predictive Control}
@@ -51,7 +65,16 @@ in which $c_j$ is the concentration of species $j$, and $r_1$ and $r_2$ are the 
     r_1=k_1 c_A\qquad r_2=k_2 c_B
 \end{equation}
 We substitute the rate laws into the material balances and specify the starting concentrations to produce three differentia equations for the three species concentrations. 
+
+\begin{enumerate}[label=(\alph*)]
+    \item write the linear state space model for the deterministic series chemical reaction model. Assume we can measure the component A concentration. What are x, y, A, B, C, and D for this model?
+    \item Simulate this model with initial conditions and parameters given by $$c_{A0}=1\quad c_{B0}=c_{C0}=0\quad k_1=2\quad k_2=1$$
+\end{enumerate}
 \end{exercise}
+\begin{answer}
+
+\end{answer}
+
 
 
 \chapter{Appendix A. Mathematical Background}
