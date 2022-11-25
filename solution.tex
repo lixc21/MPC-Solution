@@ -17,7 +17,7 @@
 \theoremstyle{definition}\newtheorem{exercise}{Exercise}[chapter]
 \declaretheoremstyle[
   headfont=\color{blue}\normalfont\bfseries,
-  bodyfont=\color{blue}\normalfont\rmshape,
+  bodyfont=\color{blue}\normalfont,
 ]{colored}
 \declaretheorem[
   style=colored,
@@ -67,13 +67,44 @@ in which $c_j$ is the concentration of species $j$, and $r_1$ and $r_2$ are the 
 We substitute the rate laws into the material balances and specify the starting concentrations to produce three differentia equations for the three species concentrations. 
 
 \begin{enumerate}[label=(\alph*)]
-    \item write the linear state space model for the deterministic series chemical reaction model. Assume we can measure the component A concentration. What are x, y, A, B, C, and D for this model?
+    \item write the linear state space model for the deterministic series chemical reaction model. Assume we can measure the component A concentration. What are $x$, $y$, $A$, $B$, $C$, and $D$ for this model?
     \item Simulate this model with initial conditions and parameters given by $$c_{A0}=1\quad c_{B0}=c_{C0}=0\quad k_1=2\quad k_2=1$$
 \end{enumerate}
 \end{exercise}
-\begin{answer}
 
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item the linear state space model is
+    \begin{equation}
+        \dv{x}{t} = 
+        \begin{bmatrix}
+            -k_1 &0 &0 \\
+            k_1 &-k_2 &0 \\
+            0 &k_2 &0 \\
+        \end{bmatrix} x = A x
+    \end{equation}
+    where $x=[c_A,\ c_B,\ c_C]^\top$. $B$ does not exist because there is no system input variables. $C=[1,\ 0,\ 0]^\top$, $D=0$, $y=Cx$.
+    \item the simulation result and code is shown bellow.
+\end{enumerate}
 \end{answer}
+
+\lstinputlisting[caption = {./code\_ch1/exer1.m},firstline=10]
+{./code_ch1/exer1.m}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
