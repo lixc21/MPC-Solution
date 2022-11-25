@@ -4,7 +4,7 @@
 \usepackage{cite,url,amsmath,amssymb,bm}
 \usepackage{algorithm,graphicx,color,mathtools}
 \usepackage{physics,enumitem,thmtools}
-
+\usepackage{hyperref}
 
 
 \title{The Solution of Model Predictive Control: Theory, Computation, and Design}
@@ -84,13 +84,20 @@ We substitute the rate laws into the material balances and specify the starting 
         \end{bmatrix} x = A x
     \end{equation}
     where $x=[c_A,\ c_B,\ c_C]^\top$. $B$ does not exist because there is no system input variables. $C=[1,\ 0,\ 0]^\top$, $D=0$, $y=Cx$.
-    \item the simulation result and code is shown bellow.
+    
+    \item the simulation result is shown as Fig.\ref{figans1}. The code used in all of the exercise can be found in github \url{https://github.com/lixc21/MPC-Solution}.
 \end{enumerate}
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=\linewidth/2]{./code_ch1/exer1.pdf}
+    \caption{system simulation}
+    \label{figans1}
+\end{figure}
 \end{answer}
 
-\lstinputlisting[caption = {./code\_ch1/exer1.m},firstline=10]
-{./code_ch1/exer1.m}
-
+\begin{exercise}
+    
+\end{exercise}
 
 
 
