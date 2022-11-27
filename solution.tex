@@ -3,8 +3,10 @@
 \usepackage{amsthm,cite,url,amsmath,amssymb,bm}
 \usepackage{algorithm,graphicx,color,mathtools}
 \usepackage{physics,enumitem,thmtools}
-\usepackage{hyperref,tikz}
-
+\usepackage{hyperref,tikz,caption}
+\usepackage[english]{babel}
+\widowpenalty=4000
+\clubpenalty=4000
 
 \title{The Solution of Model Predictive Control: Theory, Computation, and Design \cite{rawlings2017model}}
 \author{lixc21}
@@ -190,10 +192,23 @@ Let's see the connection between the delay and the distributed systems, which gi
     \end{equation} 
     where the last equation comes from $v_j=v\delta_z$.
 
-    \item Neglecting chemical reaction in the tube, we get $R_j=0$
+    \item Neglecting chemical reaction in the tube, we get $R_j=0$. Then we know that
+    \begin{equation}
+        \pdv{c_j}{t}=-\nabla\cdot(c_j v_j)=
+        -\left(\pdv{}{x}\delta_x+\pdv{}{y}\delta_y+\pdv{}{z}\delta_z\right)\cdot v\delta_z=-v\pdv{c_j}{z}
+    \end{equation}
+
+    \item Assuming that $u(t-z/v)=c_{j0}(z-vt)$ when $vt<z$, we just need to prove the solution is $c_j(z,t)=u(t-z/v)$. The variables of original partial differential equation has already been separated, so we get $c_j(z,t)=u(t-z/v)$ easily from the method of characteristics.
+
+    \item We know that $y=u(t-L/v)$, which is a time delay. The value of $\theta$ could be $L/v$.
 \end{enumerate}
 \end{answer}
 
+
+\begin{exercise} Pendulum in the state space.\\
+    Consider the pendulum suspended at the end of a rigid link 
+    
+\end{exercise}
 
 
 
