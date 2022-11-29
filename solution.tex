@@ -86,13 +86,13 @@ We substitute the rate laws into the material balances and specify the starting 
     \end{equation}
     where $x=[c_A,\ c_B,\ c_C]^\top$. $B$ does not exist because there is no system input variables. $C=[1,\ 0,\ 0]^\top$, $D=0$, $y=Cx$.
     
-    \item the simulation result is shown as Fig.\ref{fig:exer1}. The code used in all of the exercise can be found in github \url{https://github.com/lixc21/MPC-Solution}.
+    \item the simulation result is shown as Fig.\ref{fig:exer1-1}. The code used in all of the exercise can be found in github \url{https://github.com/lixc21/MPC-Solution}.
 \end{enumerate}
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\linewidth/2]{./code_ch1/exer1.pdf}
     \caption{system simulation}
-    \label{fig:exer1}
+    \label{fig:exer1-1}
 \end{figure}
 \end{answer}
 
@@ -101,7 +101,7 @@ We assume familiarity with the transfer function of a time delay from an undergr
 \begin{equation}
     \bar{y}(s)=e^{-\theta s}\bar{u}(s)
 \end{equation}
-Let's see the connection between the delay and the distributed systems, which give rise to it. A simple physical example of a time delay caused by transport in a flowing system. Consider plug flow in a tube depicted in Fig.\ref{fig:exer2}.
+Let's see the connection between the delay and the distributed systems, which give rise to it. A simple physical example of a time delay caused by transport in a flowing system. Consider plug flow in a tube depicted in Fig.\ref{fig:exer1-2}.
 
 \begin{figure}
 \centering
@@ -136,7 +136,7 @@ Let's see the connection between the delay and the distributed systems, which gi
 \draw (439,41.4) node [anchor=north west][inner sep=0.75pt]    {$c_{j} \ ( 0,t) =y( t)$};
 \end{tikzpicture}
 \caption{Plug-flow reactor}
-\label{fig:exer2}
+\label{fig:exer1-2}
 \end{figure}
 
 \begin{enumerate}[label=(\alph*)]
@@ -152,7 +152,7 @@ Let's see the connection between the delay and the distributed systems, which gi
     \end{equation}
     
     \item Assuming plug flow and neglecting chemical reaction in the tube, show that the equation of change reduces to 
-    \begin{equation}\label{equ:exer2}
+    \begin{equation}\label{equ:exer1-2}
         \pdv{c_j}{t}=-v\pdv{c_j}{z}
     \end{equation}
     This equation is known as a hyperbolic, first-order partial differential equation.
@@ -162,7 +162,7 @@ Let's see the connection between the delay and the distributed systems, which gi
     \end{alignat}
     In other words, we are using the feed concentration as the manipulated variable, $u(t)$, and the tube starts out with some initial concentration profile of component $j$, $c_{j0}(z)$.
     
-    \item Show that the solution to \eqref{equ:exer2} with these boundary conditions is 
+    \item Show that the solution to \eqref{equ:exer1-2} with these boundary conditions is 
     \begin{equation}
         c_j(z,t) = 
         \begin{cases}
@@ -206,11 +206,91 @@ Let's see the connection between the delay and the distributed systems, which gi
 
 
 \begin{exercise} Pendulum in the state space.\\
-    Consider the pendulum suspended at the end of a rigid link 
-    
+    Consider the pendulum suspended at the end of a rigid link depicted in Figure \ref{fig:exer1-3}. Let $r$ and $\theta$ denote the polar coordinates of the center of the pendulum, and let $p=r\delta_r$ be the position vector of the pendulum, in which $\delta_r$ and $\delta_\theta$ are the unit vectors in polar coordinates. We wish to determine a state space description of the system. We are able to apply a torque $T$ to the pendulum as our manipulated variable. The pendulum has mass $m$, the only other external force acting on the pendulum is gravity, and we neglect friction. The link provides force $-t\delta_r$ necessary to maintain the pendulum at distance $r=R$ from the axis of rotation, and we measure the force $t$.
+    \begin{enumerate}[label=(\alph*)]
+        \item Provide expressions for the four partial derivatives for changes in the unit vectors with $r$ and $\theta$
+        \begin{equation}
+            \pdv{\delta_r}{r}\quad
+            \pdv{\delta_r}{\theta}\quad
+            \pdv{\delta_\theta}{r}\quad
+            \pdv{\delta_\theta}{\theta}
+        \end{equation}
+        \item Use the chain rule to find the velocity of the pendulum in terms of the time derivatives of $r$ and $\theta$. Do not simplify yet by assuming $r$ is constant. We want the general result.
+        \item Differentiate again to show that the acceleration of the pendulum is
+        \begin{equation}
+            \ddot{p}=(\ddot{r}-r\dot{\theta}^2)\delta_r+(r\ddot{\theta}+2\dot r\dot \theta)\delta_\theta
+        \end{equation}
+        \item Use a momentum balance on the pendulum mass (you may assume it is a point mass) to determine both the force exerted by the link
+        \begin{equation}
+            t=mR\dot{\theta}^2+mg\cos \theta
+        \end{equation}
+        and an eqaution for the pendulum due to gravity and the applied torque 
+        \begin{equation}
+            mR\ddot \theta-T/R+mg\sin \theta=0
+        \end{equation}
+        \item Define a state vector and give a state space description of your system. What is the physical significance of your state. Assume you measure the force exerted by the link. 
+
+        One answer is 
+        \begin{align}
+            \dv{x_1}{t}&=x_2\\
+            \dv{x_2}{t}&=-(g/R)\sin x_1 + u\\
+            y&=mRx_2^2+mg\cos x_1
+        \end{align}
+        in which $u=T/(mR)$
+    \end{enumerate}
+
+    \begin{figure}
+        \centering
+        \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+        \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+        %uncomment if require: \path (0,314); %set diagram left start at 0, and has height of 314
+
+        %Shape: Circle [id:dp2950011826534309] 
+        \draw   (292,68.56) .. controls (292,63.52) and (296.08,59.44) .. (301.11,59.44) .. controls (306.14,59.44) and (310.22,63.52) .. (310.22,68.56) .. controls (310.22,73.59) and (306.14,77.67) .. (301.11,77.67) .. controls (296.08,77.67) and (292,73.59) .. (292,68.56) -- cycle ;
+        %Straight Lines [id:da090033932413494] 
+        \draw    (301.11,68.56) -- (301.11,296.11) ;
+        %Straight Lines [id:da4699536388586447] 
+        \draw    (301.11,77.67) -- (401.11,177.67) ;
+        %Straight Lines [id:da6389033949732379] 
+        \draw    (310.22,68.56) -- (410.22,168.56) ;
+        %Shape: Circle [id:dp07724480337773221] 
+        \draw   (397.56,191.11) .. controls (397.56,177.3) and (408.75,166.11) .. (422.56,166.11) .. controls (436.36,166.11) and (447.56,177.3) .. (447.56,191.11) .. controls (447.56,204.92) and (436.36,216.11) .. (422.56,216.11) .. controls (408.75,216.11) and (397.56,204.92) .. (397.56,191.11) -- cycle ;
+        %Straight Lines [id:da5473757293168724] 
+        \draw    (422.56,216.11) -- (422.56,295.78) ;
+        \draw [shift={(422.56,298.78)}, rotate = 270] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+        %Shape: Arc [id:dp03303639601363284] 
+        \draw  [draw opacity=0] (340.52,49.02) .. controls (349.47,67.04) and (345.1,89.49) .. (328.82,102.7) .. controls (309.96,118.01) and (282.27,115.12) .. (266.97,96.27) .. controls (263.64,92.16) and (261.17,87.64) .. (259.54,82.92) -- (301.11,68.56) -- cycle ; \draw   (340.52,49.02) .. controls (349.47,67.04) and (345.1,89.49) .. (328.82,102.7) .. controls (309.96,118.01) and (282.27,115.12) .. (266.97,96.27) .. controls (263.64,92.16) and (261.17,87.64) .. (259.54,82.92) ;  
+        %Straight Lines [id:da5790277832441415] 
+        \draw    (340.52,49.02) -- (338.83,45.2) ;
+        \draw [shift={(337.62,42.45)}, rotate = 66.18] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+        %Shape: Arc [id:dp13698095777819153] 
+        \draw  [draw opacity=0] (369.14,146.35) .. controls (362.68,152) and (355.4,156.92) .. (347.37,160.94) .. controls (332.57,168.36) and (316.83,171.88) .. (301.33,171.9) -- (301.11,68.56) -- cycle ; \draw   (369.14,146.35) .. controls (362.68,152) and (355.4,156.92) .. (347.37,160.94) .. controls (332.57,168.36) and (316.83,171.88) .. (301.33,171.9) ;  
+        %Straight Lines [id:da16810105436476697] 
+        \draw    (363.08,151) -- (366.76,148.18) ;
+        \draw [shift={(369.14,146.35)}, rotate = 142.52] [fill={rgb, 255:red, 0; green, 0; blue, 0 }  ][line width=0.08]  [draw opacity=0] (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle    ;
+
+        % Text Node
+        \draw (430.58,241.07) node [anchor=north west][inner sep=0.75pt]    {$g$};
+        % Text Node
+        \draw (454.92,181.07) node [anchor=north west][inner sep=0.75pt]    {$m$};
+        % Text Node
+        \draw (336.67,168.32) node [anchor=north west][inner sep=0.75pt]    {$\theta $};
+        % Text Node
+        \draw (399.25,133.82) node [anchor=north west][inner sep=0.75pt]    {$r$};
+        % Text Node
+        \draw (351.67,55.9) node [anchor=north west][inner sep=0.75pt]    {$T$};
+
+        \end{tikzpicture}
+        \caption{Pendulum with applied torque}
+        \label{fig:exer1-3}
+        \end{figure}
 \end{exercise}
 
-
+\begin{answer}
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\end{answer}
 
 
 
