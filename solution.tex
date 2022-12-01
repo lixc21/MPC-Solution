@@ -287,8 +287,21 @@ Let's see the connection between the delay and the distributed systems, which gi
 \end{exercise}
 
 \begin{answer}
-\begin{enumerate}
-    \item 
+\begin{enumerate}[label=(\alph*)]
+    \item we assume that $\delta_\theta$ is rotated from $\delta$ by anticlockwise.
+    \begin{equation}
+        \pdv{\delta_r}{r}=0 \quad
+        \pdv{\delta_r}{\theta}=\delta_\theta \quad
+        \pdv{\delta_\theta}{r}=0 \quad
+        \pdv{\delta_\theta}{\theta}=-\delta_r
+    \end{equation} 
+    \item Since $p=r\delta_r$
+    \begin{equation}
+        \dot p=\dot r\delta_r+r\pdv{\delta_r}{t}
+        =\dot r\delta_r+r\pdv{\delta_r}{\theta}\dot\theta
+        =\dot r\delta_r+\dot\theta\delta_\theta
+    \end{equation}
+    \item Differentiate again
 \end{enumerate}
 \end{answer}
 
