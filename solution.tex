@@ -299,17 +299,61 @@ Let's see the connection between the delay and the distributed systems, which gi
     \begin{equation}
         \dot p=\dot r\delta_r+r\pdv{\delta_r}{t}
         =\dot r\delta_r+r\pdv{\delta_r}{\theta}\dot\theta
-        =\dot r\delta_r+\dot\theta\delta_\theta
+        =\dot r\delta_r+r\dot\theta\delta_\theta
     \end{equation}
     \item Differentiate again
+    \begin{align}
+        \ddot p&=\ddot r \delta_r+\dot r\dot\theta\delta_\theta+r\ddot\theta\delta_\theta+r\dot\theta\left(-\delta_r\dot\theta\right)+\dot r\dot\theta\delta_\theta\\
+        &=\left(\ddot r-r\dot\theta^2\right)\delta_r+\left(r\ddot\theta+2\dot r\dot\theta\right)\delta_\theta
+    \end{align}
+    \item By the Newton's second law of motion, we get
+    \begin{equation}
+        F=-t\delta_r+T/R \delta_\theta+mg\sin\theta\delta_r+mg\cos\theta\delta_\theta=-mR\dot\theta^2\delta_r
+    \end{equation}
+    Simplify it by two direction
+    \begin{align}
+        &t=mR\dot\theta^2+mg\cos\theta\\
+        &mR\ddot\theta-T/R+mg\sin\theta=0
+    \end{align}
+    \item State vector could be $x=[\theta,\dot \theta]^\top$, and the system
+    \begin{align}
+        \dot x&=\begin{bmatrix}
+            \dot \theta\\
+            \ddot \theta
+        \end{bmatrix}=
+        \begin{bmatrix}
+            \dot \theta\\
+            -g\sin\theta/R+T/\left(mR^2\right)
+        \end{bmatrix}\\
+        y&=\theta
+    \end{align}
 \end{enumerate}
 \end{answer}
 
+\begin{exercise} Time to Laplace domain.\\
+Take the Laplace transform of the following set of differential equations and find the transfer function, $G(s)$, connecting $\bar u(s)$ and $\bar y(s)$, $\bar y=G\bar u$
+\begin{align}
+    \dv{x}{t}&=Ax+Bu\\
+    y&=Cx=Du
+\end{align}
+For $x\in\mathbb R^n$, $y\in\mathbb R^p$, and $u\in\mathbb R^m$, what is the dimension of the $G$ matrix? What happens to the initial condition, $x(0)=x_0$? 
+\end{exercise}
 
+\begin{answer}
+The Laplace transform of the differential equation is 
+\begin{equation}
+    sx=Ax+Bu
+\end{equation}
+and the transfer function
+\begin{equation}
+    G(s)=C(sI-A)^{-1}B\in\mathbb{R}^{p\times m}
+\end{equation}
+the initial condition does not appear in the Laplace transform, because the Laplace transform explains the dynamic from $u$ to $y$, and when we need to determine the accurate trajectory of the system, the initial condition is needed by inverse Laplace transform.
+\end{answer}
 
-
-
-
+\begin{exercise} Converting between continuous and discrete time models.\\
+Given a perscribed $u(t)$
+\end{exercise}
 
 
 
