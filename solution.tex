@@ -224,7 +224,7 @@ Let's see the connection between the delay and the distributed systems, which gi
         \begin{equation}
             t=mR\dot{\theta}^2+mg\cos \theta
         \end{equation}
-        and an eqaution for the pendulum due to gravity and the applied torque 
+        and an equation for the pendulum due to gravity and the applied torque 
         \begin{equation}
             mR\ddot \theta-T/R+mg\sin \theta=0
         \end{equation}
@@ -332,9 +332,9 @@ Let's see the connection between the delay and the distributed systems, which gi
 
 \begin{exercise} Time to Laplace domain.\\
 Take the Laplace transform of the following set of differential equations and find the transfer function, $G(s)$, connecting $\bar u(s)$ and $\bar y(s)$, $\bar y=G\bar u$
-\begin{align}
+\begin{align}\label{equ:exer1-4}
     \dv{x}{t}&=Ax+Bu\\
-    y&=Cx=Du
+    y&=Cx+Du
 \end{align}
 For $x\in\mathbb R^n$, $y\in\mathbb R^p$, and $u\in\mathbb R^m$, what is the dimension of the $G$ matrix? What happens to the initial condition, $x(0)=x_0$? 
 \end{exercise}
@@ -352,26 +352,112 @@ the initial condition does not appear in the Laplace transform, because the Lapl
 \end{answer}
 
 \begin{exercise} Converting between continuous and discrete time models.\\
-Given a prescribed $u(t)$
+Given a prescribed $u(t)$, derive and check the solution to \eqref{equ:exer1-4}. Given a prescribed $u(k)$ sequence, what is the solution to the discrete time model
+\begin{align}
+    x(k+1)&=\tilde Ax(k)+\tilde Bu(k)\\
+    y(k)&=\tilde Cx(k)+\tilde Du(k)
+\end{align}
+\begin{enumerate}[label=(\alph*)]
+    \item Compute $\tilde A$, $\tilde B$, $\tilde C$, and $\tilde D$ so that the two solutions agree at the sample times for a zero-order hold input, i.e., $y(k)=y(t_k)$ for $u(t)=u(k), t\in (t_k,t_{k+1})$ in which $t_k=k\Delta$ for sample time $\Delta$.
+    \item Is your result valid for $A$ singular? If not, how can you find $\tilde A$, $\tilde B$, $\tilde C$, and $\tilde D$ for this case?
+\end{enumerate}
 \end{exercise}
 
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item the solution to \eqref{equ:exer1-4} is
+    \begin{equation}
+        x(\Delta)=e^{A\Delta}x_0+\int_0^\Delta e^{A(\Delta-\tau)}Bu(\tau)\dd x
+    \end{equation}
+    so the accurate discrete time model is
+    \begin{equation}
+        \tilde{A}=e^{A\Delta}\quad\tilde B=\int_0^\Delta e^{A(\Delta-\tau)}B\dd x
+        \quad\tilde{C}=C\quad\tilde{D}=D
+    \end{equation}
+    \item Yes, this result can be calculate normally even if A is singular.
+\end{enumerate}
+\end{answer}
 
+\begin{exercise}Continuous to discrete time conversion for nonlinear models\\
+Consider the autonomous nonlinear differential equation model 
+\begin{align}\label{equ:exer1-6}
+    \dv{x}{t}&=f(x,u)\\
+    x(0)&=x_0
+\end{align} 
+Given a zero-order hold on the input, let $s(t,u,x_0),0\le t\le\Delta$, be the solution to \eqref{equ:exer1-6} given initial condition $x_0$ at the time $t=0$, and constant input $u$ is applied for $t$ in the interval $0\le t\le\Delta$. Consider also the nonlinear discrete time model
+\begin{equation}
+    x(k+1)=F(x(k),u(k))
+\end{equation}
+\begin{enumerate}[label=(\alph*)]
+    \item What is the relationship between $F$ and $s$ so that the solution of the discrete time model agrees at the sample times with the continuous time model with a zero-order hold?
+    \item Assume $f$ is linear and apply this result to check the result of Exercise 1.5.
+\end{enumerate}
+\end{exercise}
 
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item The relationship is 
+    \begin{equation}
+        F(x(k),u(k))=s(\Delta,u(k-1),x(k-1))
+    \end{equation}
+    \item It is obvious.
+\end{enumerate}
+\end{answer}
 
+\begin{exercise}Commuting functions of a matrix.\\
+Although matrix multiplication does not commute in general
+\begin{equation}
+    AB\neq BA
+\end{equation}
+multiplication of functions of the same matrix do commute. You may have used the following fact in Exercise 1.5
+\begin{equation}\label{equ:exer1-7}
+    A^{-1}\exp{At}=\exp{At}A^{-1}
+\end{equation}
+\begin{enumerate}[label=(\alph*)]
+    \item Prove that \eqref{equ:exer1-7} is true assuming $A$ has distinct eigenvalues and can therefore be represented as 
+    \begin{equation}
+        A=Q\Lambda Q^{-1}\quad 
+        \Lambda=\begin{bmatrix}
+            \lambda_1 &0 &\cdots &0\\
+            0 &\lambda_2 &\cdots &0\\
+            \vdots &\vdots &\ddots &\vdots\\
+            0 &0 &\cdots &\lambda_n\\
+        \end{bmatrix}
+    \end{equation}
+    in which $\Lambda$ is a diagonal matrix containing the eigenvalues of $A$, and $Q$ is the matrix of eigenvectors such that
+    \begin{equation}
+        Aq_i=\lambda_iq_i, \quad i=1,\cdots,n
+    \end{equation}
+    in which $q_i$ is the $i$th column of the matrix $Q$.
+    \item Prove the more general relationship
+    \begin{equation}\label{equ:exer1-7-2}
+        f(A)g(A)=g(A)f(A)
+    \end{equation}
+    in which $f$ and $g$ are any functions definable by Taylor series.
+    \item Prove that \eqref{equ:exer1-7-2} is true without assuming the eigenvalues are distinct.\\
+    Hint: use the Taylor series defining the functions and apply the Cayley-Hamilton theorem\cite{rawlings2017model}.
+\end{enumerate}
+\end{exercise}
 
+\begin{answer}
+By using Cayley-Hamilton theorem, we know the matrix functions definable by Taylor series can be written in the sum of finite power terms of matrix A\cite{CayleyHamiltonTheorem}. So all the question is answered obviously by matrix commutability of finite power terms.
+\end{answer}
 
-
-\chapter{Appendix A. Mathematical Background}
-Since the mathematical background is basic, we jump to the exercises section.
-\section{The solution of Exercises}
-\begin{exercise} Norms in $\mathbb{R}^n$\\
-Show that the following three functions are all norms in $\mathbb{R}^n$
-
-\begin{equation}\notag
-    \|x\|_2 
+\begin{equation}Finite
 \end{equation}
 
-\end{exercise}
+
+% \chapter{Appendix A. Mathematical Background}
+% Since the mathematical background is basic, we jump to the exercises section.
+% \section{The solution of Exercises}
+% \begin{exercise} Norms in $\mathbb{R}^n$\\
+% Show that the following three functions are all norms in $\mathbb{R}^n$
+
+% \begin{equation}\notag
+%     \|x\|_2 
+% \end{equation}
+
+% \end{exercise}
 
 \bibliographystyle{unsrt}
 \bibliography{mybib}
