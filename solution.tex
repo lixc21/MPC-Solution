@@ -103,7 +103,7 @@ We assume familiarity with the transfer function of a time delay from an undergr
 \end{equation}
 Let's see the connection between the delay and the distributed systems, which give rise to it. A simple physical example of a time delay caused by transport in a flowing system. Consider plug flow in a tube depicted in Fig.\ref{fig:exer1-2}.
 
-\begin{figure}
+\begin{figure}[htbp]
 \centering
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
 \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
@@ -239,7 +239,7 @@ Let's see the connection between the delay and the distributed systems, which gi
         in which $u=T/(mR)$
     \end{enumerate}
 
-    \begin{figure}
+    \begin{figure}[htbp]
         \centering
         \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
         \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
@@ -443,8 +443,116 @@ multiplication of functions of the same matrix do commute. You may have used the
 By using Cayley-Hamilton theorem, we know the matrix functions definable by Taylor series can be written in the sum of finite power terms of matrix A\cite{CayleyHamiltonTheorem}. So all the question is answered obviously by matrix commutability of finite power terms.
 \end{answer}
 
-\begin{equation}Finite
+\begin{exercise}Finite difference formula and approximating the exponential.\\
+Instead of computing the exact conversion of a continuous time to a discrete time system as in Exercise 1.5, assume instead one simply approximates the time derivative with a first-order finite difference formula
+\begin{equation}
+    \dv{x}{t}\approx\dfrac{x(t_{k-1})-x(t_k)}{\Delta}
 \end{equation}
+with  step size equal to the sample time, $\Delta$. For this approximation of the continuous time system, compute $\tilde A$ and $\tilde B$ so that the discrete time system agrees with the approximate continuous time system at the sample times. Comparing these answers to the exact solution, what approximation of $e^{A\Delta}$ results from the finite difference approximation? When is this a good approximation of $e^{A\Delta}$?
+\end{exercise}
+
+\begin{answer}
+In this case, the system function can be written as 
+\begin{equation}
+    \dfrac{x(t_{k+1})-x(t_k)}{\Delta}=Ax(t_k)+Bu(t_k)
+\end{equation} 
+which could be written as
+\begin{equation}
+    x(t_{k+1})=(I+\Delta A)x(t_k)+\Delta Bu(t_k)
+\end{equation}
+So $\tilde A=I+\Delta A$, $\tilde B=\Delta B$, and $e^{A\Delta}\approx I+\Delta A$. When $\Delta$ is small, this is a good approximation.
+\end{answer}
+
+\begin{exercise}Mapping eigenvalues of continuous time systems to discrete time systems.\\
+Consider the continuous time differential equation and discrete equation
+\begin{align}
+    \dv{x}{t}&=Ax\\
+    x^+&=\tilde Ax
+\end{align}
+and the transformation
+\begin{equation}
+    \tilde A=e^{A\Delta}
+\end{equation}
+Consider the scalar $A$ case.
+\begin{enumerate}[label=(\alph*)]
+    \item What $A$ represents an integrator in continuous time? What is the corresponding $A$ value for the integrator for discrete time?
+    \item What $A$ give purely oscillatory solutions? What are the corresponding $\tilde A$?
+    \item For what $A$ is the solution of the ODE stable? Unstable? What are the corresponding $\tilde A$?
+    \item Sketch and label these $A$ and $\tilde A$ regions in two complex-plane diagrams.
+\end{enumerate}
+\end{exercise}
+
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item In continuous time, $A=0$, and the corresponding $\tilde A=I$.
+    \item $A$ with all eigenvalues on the image axis give purely oscillatory solutions, and the corresponding $\tilde A$ has all its eigenvalues on the unit circle.
+    \item $A$ with all eigenvalues on the left-half plane give the solution of the ODE stable (right-half plane give the solution of the ODE unstable), and the corresponding $\tilde A$ has its all eigenvalues in the unit circle (out of the unit circle).
+    \item See Fig.\ref{fig:exer1-9}.
+\end{enumerate}
+\begin{figure}[htbp]
+    \centering
+
+
+
+
+    \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
+
+    \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+    %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
+    
+    % Plotting does not support converting to Tikz
+    %Shape: Circle [id:dp3951835450590713] 
+    \draw  [fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.5 ] (151.44,146.28) .. controls (151.44,126.79) and (167.24,111) .. (186.72,111) .. controls (206.21,111) and (222,126.79) .. (222,146.28) .. controls (222,165.76) and (206.21,181.56) .. (186.72,181.56) .. controls (167.24,181.56) and (151.44,165.76) .. (151.44,146.28) -- cycle ;
+    % Plotting does not support converting to Tikz
+    %Shape: Rectangle [id:dp741144984442009] 
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.5 ] (359.33,40.67) -- (465.67,40.67) -- (465.67,253.56) -- (359.33,253.56) -- cycle ;
+    
+    
+    
+    
+    \end{tikzpicture}
+    
+    
+    \caption{Stable and Unstable $A$ and $\tilde A$ in two complex plane}
+    \label{fig:exer1-9}
+    \end{figure}
+\end{answer}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 % \chapter{Appendix A. Mathematical Background}
