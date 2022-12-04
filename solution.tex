@@ -487,40 +487,70 @@ Consider the scalar $A$ case.
     \item In continuous time, $A=0$, and the corresponding $\tilde A=I$.
     \item $A$ with all eigenvalues on the image axis give purely oscillatory solutions, and the corresponding $\tilde A$ has all its eigenvalues on the unit circle.
     \item $A$ with all eigenvalues on the left-half plane give the solution of the ODE stable (right-half plane give the solution of the ODE unstable), and the corresponding $\tilde A$ has its all eigenvalues in the unit circle (out of the unit circle).
-    \item See Fig.\ref{fig:exer1-9}.
+    \item See Fig.\ref{fig:exer1-9}. The orange area denote the stable $A$, and the blue area denote the unstable $A$.
 \end{enumerate}
 \begin{figure}[htbp]
     \centering
-
-
-
 
     \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt        
 
     \begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
     %uncomment if require: \path (0,300); %set diagram left start at 0, and has height of 300
     
-    % Plotting does not support converting to Tikz
+    %Shape: Rectangle [id:dp41972077044956557] 
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.3 ] (137.72,95.2) -- (277.06,95.2) -- (277.06,236.53) -- (137.72,236.53) -- cycle ;
+    %Shape: Circle [id:dp17807459140017246] 
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 255; green, 255; blue, 255 }  ,fill opacity=1 ] (164.67,165.86) .. controls (164.67,142.27) and (183.8,123.14) .. (207.39,123.14) .. controls (230.99,123.14) and (250.11,142.27) .. (250.11,165.86) .. controls (250.11,189.46) and (230.99,208.59) .. (207.39,208.59) .. controls (183.8,208.59) and (164.67,189.46) .. (164.67,165.86) -- cycle ;
     %Shape: Circle [id:dp3951835450590713] 
-    \draw  [fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.5 ] (151.44,146.28) .. controls (151.44,126.79) and (167.24,111) .. (186.72,111) .. controls (206.21,111) and (222,126.79) .. (222,146.28) .. controls (222,165.76) and (206.21,181.56) .. (186.72,181.56) .. controls (167.24,181.56) and (151.44,165.76) .. (151.44,146.28) -- cycle ;
-    % Plotting does not support converting to Tikz
-    %Shape: Rectangle [id:dp741144984442009] 
-    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 245; green, 166; blue, 35 }  ,fill opacity=0.5 ] (359.33,40.67) -- (465.67,40.67) -- (465.67,253.56) -- (359.33,253.56) -- cycle ;
+    \draw  [fill={rgb, 255:red, 245; green, 152; blue, 35 }  ,fill opacity=0.3 ] (164.67,165.86) .. controls (164.67,142.27) and (183.8,123.14) .. (207.39,123.14) .. controls (230.99,123.14) and (250.11,142.27) .. (250.11,165.86) .. controls (250.11,189.46) and (230.99,208.59) .. (207.39,208.59) .. controls (183.8,208.59) and (164.67,189.46) .. (164.67,165.86) -- cycle ;
+    %Shape: Axis 2D [id:dp2649968087855814] 
+    \draw  (115.28,165.86) -- (295.89,165.86)(207.39,77.94) -- (207.39,249.78) (288.89,160.86) -- (295.89,165.86) -- (288.89,170.86) (202.39,84.94) -- (207.39,77.94) -- (212.39,84.94)  ;
+    %Shape: Rectangle [id:dp3122182305712575] 
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 74; green, 144; blue, 226 }  ,fill opacity=0.3 ] (442.72,95.2) -- (512.39,95.2) -- (512.39,236.53) -- (442.72,236.53) -- cycle ;
+    %Shape: Axis 2D [id:dp6823514523283494] 
+    \draw  (350.62,165.86) -- (531.22,165.86)(442.72,77.94) -- (442.72,249.78) (524.22,160.86) -- (531.22,165.86) -- (524.22,170.86) (437.72,84.94) -- (442.72,77.94) -- (447.72,84.94)  ;
+    %Shape: Rectangle [id:dp9907477927724002] 
+    \draw  [color={rgb, 255:red, 0; green, 0; blue, 0 }  ,draw opacity=0 ][fill={rgb, 255:red, 245; green, 152; blue, 35 }  ,fill opacity=0.25 ] (373.06,95.2) -- (442.72,95.2) -- (442.72,236.53) -- (373.06,236.53) -- cycle ;
     
-    
+    % Text Node
+    \draw (285.33,175.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Real};
+    % Text Node
+    \draw (218,74) node [anchor=north west][inner sep=0.75pt]   [align=left] {Image};
+    % Text Node
+    \draw (190.67,167.07) node [anchor=north west][inner sep=0.75pt]    {$O$};
+    % Text Node
+    \draw (252.11,169.26) node [anchor=north west][inner sep=0.75pt]    {$1$};
+    % Text Node
+    \draw (520.67,175.33) node [anchor=north west][inner sep=0.75pt]   [align=left] {Real};
+    % Text Node
+    \draw (453.33,74) node [anchor=north west][inner sep=0.75pt]   [align=left] {Image};
+    % Text Node
+    \draw (426,167.07) node [anchor=north west][inner sep=0.75pt]    {$O$};
     
     
     \end{tikzpicture}
-    
     
     \caption{Stable and Unstable $A$ and $\tilde A$ in two complex plane}
     \label{fig:exer1-9}
     \end{figure}
 \end{answer}
 
+\begin{exercise}State space realization\\
+Define a state vector and realize the following models as the state models by hand. One should do a few by hand to understand what the Octave or MATLAB calls are doing. Answer the following questions. What is the connection betweenthe poles of $G$ and the state space description? For what kinds of $G(s)$ does one obtain a nonzero $D$ matrix? What is the order and gain of these systems? Is there a connection between order and the numbers of inputs and outputs?
+\begin{enumerate}[label=(\alph*)]
+    \item $$G(s)=\dfrac{1}{2s+1}$$
+    \item $$G(s)=\dfrac{1}{(2s+1)(3s+1)}$$
+    \item $$G(s)=\dfrac{2s+1}{3s+1}$$
+    \item $$y(k+1)=y(k)+2u(k)$$
+    \item $$y(k+1)=a_1 y(k)+a_2 y(k-1)+b_1 u(k)+b_2 u(k-1)$$
+\end{enumerate}
+\end{exercise}
 
-
-
+\begin{answer}
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\end{answer}
 
 
 
