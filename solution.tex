@@ -536,7 +536,7 @@ Consider the scalar $A$ case.
 \end{answer}
 
 \begin{exercise}State space realization\\
-Define a state vector and realize the following models as the state models by hand. One should do a few by hand to understand what the Octave or MATLAB calls are doing. Answer the following questions. What is the connection betweenthe poles of $G$ and the state space description? For what kinds of $G(s)$ does one obtain a nonzero $D$ matrix? What is the order and gain of these systems? Is there a connection between order and the numbers of inputs and outputs?
+Define a state vector and realize the following models as the state models by hand. One should do a few by hand to understand what the Octave or MATLAB calls are doing. Answer the following questions. What is the connection between the poles of $G$ and the state space description? For what kinds of $G(s)$ does one obtain a nonzero $D$ matrix? What is the order and gain of these systems? Is there a connection between order and the numbers of inputs and outputs?
 \begin{enumerate}[label=(\alph*)]
     \item $$G(s)=\dfrac{1}{2s+1}$$
     \item $$G(s)=\dfrac{1}{(2s+1)(3s+1)}$$
@@ -547,9 +547,67 @@ Define a state vector and realize the following models as the state models by ha
 \end{exercise}
 
 \begin{answer}
-\begin{enumerate}
-    \item 
+A state vector is an array of values that combine to represent the state of a system. It is usually composed of the variables describing the system's position and velocity, as well as any other variables that are necessary to describe its behavior.
+\begin{enumerate}[label=(\alph*)]
+\item The state space representation for $G(s)=\frac{1}{2s+1}$ is:
+\begin{equation}
+    A = -1/2\quad
+    B = 1\quad
+    C = 1\quad
+    D = 0
+\end{equation}
+The poles of $G$ are the eigenvalues of the matrix $A$. In this case, $A=-1/2$, so the poles of $G$ are $-1$.
+
+\item The state space representation for $G(s) = \frac{1}{(2s+1)(3s+1)}$ is:
+\begin{equation}
+    A &= \begin{bmatrix} -2 & -3 \\ 1 & 0 \end{bmatrix}\\
+    B &= \begin{bmatrix} 1 \\ 0 \end{bmatrix}\\
+    C &= \begin{bmatrix} 1 & 0 \end{bmatrix}\\
+    D &= 0
+\end{equation}
+The poles of $G$ are the eigenvalues of the matrix $A$. In this case, the eigenvalues are $-2$ and $-3$, so the poles of $G$ are $-2$ and $-3$.
+
 \end{enumerate}
+
+
+(b) 
+
+
+(c) The state space representation for $G(s) = \frac{2s+1}{3s+1}$ is:
+\begin{align*}
+A &= -1\\
+B &= \begin{bmatrix} 1 \\ 0 \end{bmatrix}\\
+C &= \begin{bmatrix} 1 & 0 \end{bmatrix}\\
+D &= \begin{bmatrix} 1 & 0 \end{bmatrix}
+\end{align*}
+The poles of $G$ are the eigenvalues of the matrix $A$. In this case, $A = -1$, so the poles of $G$ are $-1$.
+
+(d) The state space representation for $y(k+1)=y(k)+2u(k)$ is:
+\begin{align*}
+A &= 1\\
+B &= \begin{bmatrix} 2 \\ 0 \end{bmatrix}\\
+C &= \begin{bmatrix} 1 & 0 \end{bmatrix}\\
+D &= 0
+\end{align*}
+The poles of $G$ are the eigenvalues of the matrix $A$. In this case, $A = 1$, so the poles of $G$ are $1$.
+
+(e) The state space representation for $y(k+1)=a_1 y(k)+a_2 y(k-1)+b_1 u(k)+b_2 u(k-1)$ is:
+\begin{align*}
+A &= \begin{bmatrix} a_1 & a_2 \\ 0 & 0 \end{bmatrix}\\
+B &= \begin{bmatrix} b_1 \\ b_2 \end{bmatrix}\\
+C &= \begin{bmatrix} 1 & 0 \end{bmatrix}\\
+D &= 0
+\end{align*}
+The poles of $G$ are the eigenvalues of the matrix $A$. In this case, the eigenvalues are $a_1$ and $a_2$, so the poles of $G$ are $a_1$ and $a_2$.
+
+The connection between the poles of $G$ and the state space description is that the poles of $G$ are the eigenvalues of the matrix $A$.
+
+A nonzero $D$ matrix is obtained for systems where there is a direct connection between the inputs and the outputs. This can be seen in the example of $G(s) = \frac{2s+1}{3s+1}$, where the $D$ matrix is nonzero.
+
+The order of the systems in (a) - (e) is 1, 2, 1, 1, and 2 respectively. The gains of the systems are 0, 0, 1, 2, and $b_1$ and $b_2$, respectively.
+
+There is a connection between the order of the system and the number of inputs and outputs. For a system with $n$ inputs and $m$ outputs, the order of the system will be at least $n$ and at most $m$.
+
 \end{answer}
 
 
