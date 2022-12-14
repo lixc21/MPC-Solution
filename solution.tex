@@ -549,21 +549,21 @@ Define a state vector and realize the following models as the state models by ha
 \begin{answer}
 A state vector is an array of values that combine to represent the state of a system. It is usually composed of the variables describing the system's position and velocity, as well as any other variables that are necessary to describe its behavior.
 \begin{enumerate}[label=(\alph*)]
-\item The state space representation for $G(s)=\frac{1}{2s+1}$ is:
+\item The state space representation for $G(s)=1/(2s+1)$ is:
 \begin{equation}
-    A = -1/2\quad
-    B = 1\quad
-    C = 1\quad
+    A = -1/2,\quad
+    B = 1,\quad
+    C = 1,\quad
     D = 0
 \end{equation}
-The poles of $G$ are the eigenvalues of the matrix $A$. In this case, $A=-1/2$, so the poles of $G$ are $-1$.
+The poles of $G$ are the eigenvalues of the matrix $A$. In this case, $A=-1/2$, so the poles of $G$ are $-1/2$.
 
-\item The state space representation for $G(s) = \frac{1}{(2s+1)(3s+1)}$ is:
+\item The state space representation for $G(s) = 1/(2s+1)(3s+1)$ is:
 \begin{equation}
-    A &= \begin{bmatrix} -2 & -3 \\ 1 & 0 \end{bmatrix}\\
-    B &= \begin{bmatrix} 1 \\ 0 \end{bmatrix}\\
-    C &= \begin{bmatrix} 1 & 0 \end{bmatrix}\\
-    D &= 0
+    A = \begin{bmatrix} -2 & -3 \\ 1 & 0 \end{bmatrix},\quad
+    B = \begin{bmatrix} 1 \\ 0 \end{bmatrix},\quad
+    C = \begin{bmatrix} 1 & 0 \end{bmatrix},\quad
+    D = 0
 \end{equation}
 The poles of $G$ are the eigenvalues of the matrix $A$. In this case, the eigenvalues are $-2$ and $-3$, so the poles of $G$ are $-2$ and $-3$.
 
