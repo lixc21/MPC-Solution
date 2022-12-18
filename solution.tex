@@ -706,7 +706,7 @@ The result can be obtained by directly substituting the matrix of this exercise 
     Because $(A,B)$ is stabilizable, there exists a sequence of $\text{dim}(x_1)$ inputs that transfers the $x_1$ to zero. When $k>\text{dim}(x_1)$, we repeat the strategy of $u$. Notice that the system trajectories start at every $x_1=0$ have the scaling of $\|x_2\|$. Because $\|x_2\|$ decrease exponentially, so the objective function $V(x,u)=\sum_{k=0}^\infty x_k^\top Qx_k+u^\top Ru$ is finite, which implies the optimization problem is feasible. On the other hand, the solution is unique since $R>0$ and the objective function is strict convex with $u$.
     So the solution of the LQR problem exists and is unique. This implies to that the objective function is non-increasing with time, and we have $x\to 0$, $u\to 0$ as $k\to 0$. The LQR is stabilizing.
 
-    \item The difference is that $Q>0$ is replaced by $Q\ge 0$ and $(A,Q)$ detectable. We prove it by contradiction. Assume $x\to 0$ is false, then there exists $\epsilon$ such that for any $N$, when $k>N$, there exists $\|x_k\|>\epsilon$. We choose $N$ large enough, such that we can ignore sufficient small $u$. For the observable states $x_3$, we expand the system function from time $k$ to time $k+\text{dim}(x_3) = k+m$, then $[y_k,\cdots, y_{k+m}]=[Q; QA;\cdots;QA^{m-1}]x_k$. Because $[Q; QA;\cdots;QA^{m-1}]$ is full rank, so the norm of $[y_k,\cdots, y_{k+m}]$ has a positive lower bound. Select $N$ repeatly, we can always find $\|Qx_k\|$ has a positive lower bound. This contradicts $x_k^\top Qx_k\to 0$. If $Q$ is not positive semidefinite or $(A,Q)$ is not detectable, the state may not convergent to zero.
+    \item The difference is that $Q>0$ is replaced by $Q\ge 0$ and $(A,Q)$ detectable. We prove it by contradiction. Assume $x\to 0$ is false, then there exists $\epsilon$ such that for any $N$, when $k>N$, there exists $\|x_k\|>\epsilon$. We choose $N$ large enough, such that we can ignore sufficient small $u$ and unobservable states. For the observable states $x_3$, we expand the system function from time $k$ to time $k+\text{dim}(x_3) = k+m$, then $[y_k,\cdots, y_{k+m}]=[Q; QA;\cdots;QA^{m-1}]x_k$. Because $[Q; QA;\cdots;QA^{m-1}]$ is full rank, so the norm of $[y_k,\cdots, y_{k+m}]$ has a positive lower bound. Select $N$ repeatly, we can always find $\|Qx_k\|$ has a positive lower bound. This contradicts $x_k^\top Qx_k\to 0$. If $Q$ is not positive semidefinite or $(A,Q)$ is not detectable, the state may not convergent to zero.
 \end{enumerate}
 \end{answer}
 
@@ -714,16 +714,186 @@ The result can be obtained by directly substituting the matrix of this exercise 
 \end{exercise}
 \begin{answer}
 Following the chapters in the textbook, we get that
+\begin{align*}
+    \Pi(k-1)=&Q(k)+A(k)^\top\Pi(k)A(k)\\
+    &-A(k)^\top\Pi(k)B(k)(B(k)^\top\Pi(k)B(k)+R(k))^{-1}B(k)^\top\Pi(k)A(k),~k=N,\cdots,1\\
+    \Pi(N)=&Q(N),\\
+    u_k^0(x)=&K(k)x,~k=N-1,\cdots,0\\
+    K(k)=&-(B(k)^\top\Pi(k+1)B(k)+R(k))^{-1}B(k)^\top\Pi(k+1)A(k),~k=N-1,\cdots,0\\
+    V_k^0(x)=&(1/2)x^\top\Pi(k)x
+\end{align*}
+Obviously, this problem also can be solved in closed form like the time-invariant case.
+\end{answer}
+
+\begin{exercise}Steady-state Riccati equation.\\
+\end{exercise}
+\begin{answer}
+Whether it is stable A, unstable A, singular A, the final result is the same. The results obtained by iteration of Riccati equation and MATLAB function are completely consistent. the eigenvalues value of $A+BK$ is in the unit cycle. And the larger Q is, the closer the eigenvalues value of $A+BK$ is to the origin. 
 \end{answer}
 
 
+\begin{exercise}Positive definite Riccati iteration.\\
+\end{exercise}
+
+\begin{answer}
+by Woodbury matrix identity, we get
+\begin{align*}
+    \Pi(k-1)&=Q+A^\top\Pi A-A^\top\Pi B(B^\top\Pi B+R)^{-1}B^\top\Pi A\\
+    &=Q+A^\top(\Pi- B(B^\top\Pi B+R)^{-1}B^\top\Pi) A\\
+    &=Q+A^\top(\Pi^{-1}+BR^{-1}B^\top)A>0
+\end{align*}
+\end{answer}
+
+\begin{exercise}Existence and uniqueness of the solution to constrained least squares.\\
+\end{exercise}
+\begin{answer}
+If this problem has a solution for every $b$ and the solution is unique, we know $\text{rank}(A)=p$. Otherwise, we can choose $b$ to let $Ax=b$ cannot have a solution. And we know
+\begin{equation}
+    \begin{bmatrix}
+        Q\\A
+    \end{bmatrix}x=
+    \begin{bmatrix}
+        A^\top \lambda \\b
+    \end{bmatrix}
+\end{equation}
+If the rank of $[Q;A]$ is less than $n$, the problem has infinite solutions.
+On the other hand, the rank condition of $A$ promise that the linear constraints always represent a subspace. And the rank condition of $[Q;A]$ promise there is unique solution.
+\end{answer}
 
 
+\begin{exercise}Rate-of-change penalty.\\
+\end{exercise}
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item The Riccati iteration is \cite{StanfordLQR}
+    \begin{align}
+        K(k)&=-(R+B^\top \Pi B)^{-1}(B^\top \Pi(t+1)A+M^\top)\\
+        \Pi(k-1)&=Q+A^\top\Pi A-(A^\top\Pi B + M)(B^\top\Pi B+R)^{-1}(B^\top\Pi A+M^\top)
+    \end{align}
+    \item The new system is
+    \begin{align}
+        \begin{bmatrix}
+            x(k+1)\\u(k)
+        \end{bmatrix}=
+        \begin{bmatrix}
+            A &0\\
+            0 &0
+        \end{bmatrix}
+        \begin{bmatrix}
+            x(k)\\u(k-1)
+        \end{bmatrix}+
+        \begin{bmatrix}
+            B\\I
+        \end{bmatrix}u(k)
+    \end{align}
+    \begin{equation}
+        \Delta u(k)=u(k)-[0~I]\tilde x(k)
+    \end{equation}
+    The new matric are
+    \begin{align}
+        &x^\top Qx+u^\top Ru+\Delta u^\top S \Delta u  \\
+        =~&\tilde x^\top
+        \begin{bmatrix}
+            Q &0\\ 0 &S
+        \end{bmatrix}
+        \tilde x
+        +u^\top (R+S)u
+        -2\tilde x^\top \begin{bmatrix}0\\S\end{bmatrix} u
+    \end{align}
+\end{enumerate}
+\end{answer}
 
 
+\begin{exercise}Existence, uniqueness and stability with the cross term.\\
+\end{exercise}
+\begin{answer}
+The reparameterizing is
+\begin{equation}
+    v=u+R^{-1}M^\top x
+\end{equation}
+and the new value function is 
+\begin{equation}
+    V=(1/2)\sum_{k=0}^\infty x(k)^\top(Q-MR^{-1}M^\top)+v(k)^\top R v(k)
+\end{equation}
+and the system changes to
+\begin{equation}
+    x(k+1)=(A-BR^{-1}M^\top)x(k)+Bv(k)
+\end{equation}
+the existence, uniqueness and stability conditions are $(A-BR^{-1}M^\top,B)$ stabilizable, $Q-MR^{-1}M^\top\ge 0$, $(A-BR^{-1}M^\top, Q-MR^{-1}M^\top)$ detectable, and $R\ge 0$.
+\end{answer}
+
+\begin{exercise}Forecasting and variance increase or decrease.\\
+\end{exercise}
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item A counterexample
+    \begin{equation}
+        A=
+        \begin{bmatrix}
+        0 & 1/2 \\
+        1/2 & 0 \\
+        \end{bmatrix},\quad
+        P=
+        \begin{bmatrix}
+        1 & 0 \\
+        0 & 100 \\
+        \end{bmatrix}
+    \end{equation}
+    \item A counterexample
+    \begin{equation}
+        A=
+        \begin{bmatrix}
+        0 & 2 \\
+        2 & 0 \\
+        \end{bmatrix},\quad
+        P=
+        \begin{bmatrix}
+        1 & 0 \\
+        0 & 100 \\
+        \end{bmatrix}
+    \end{equation}
+    \item A counterexample
+    \begin{equation}
+        A=
+        \begin{bmatrix}
+        0 & 2 \\
+        2 & 0 \\
+        \end{bmatrix},\quad
+        P=
+        \begin{bmatrix}
+        1 & 0 \\
+        0 & 100 \\
+        \end{bmatrix}
+    \end{equation}
+\end{enumerate}
+\end{answer}
 
 
+\begin{exercise}Convergence of MHE with zero prior weighting.\\
+\end{exercise}
+\begin{answer}
+In the absence of noise, if the data length is greater than the observability index, the unique solution can be obtained. When the data is insufficient, the solution belong to a linear subspace. When the data reaches the observability index, the initial state can be directly calculated, and the optimization has unique solution.
+\end{answer}
 
+\begin{exercise}Symmetry in regulation and estimation.\\
+\end{exercise}
+\begin{answer}
+After tedious calculation, the conclusion shown in the exercise is obvious.
+\end{answer}
+
+
+\begin{exercise}Symmetry in the Riccati iteration.\\
+\end{exercise}
+\begin{answer}
+    The conclusion is obvious through variable replacement.
+\end{answer}
+
+
+\begin{exercise}Detectability and observability canonical forms.\\
+\end{exercise}
+\begin{answer}
+
+\end{answer}
 
 
 
