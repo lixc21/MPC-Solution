@@ -892,14 +892,203 @@ After tedious calculation, the conclusion shown in the exercise is obvious.
 \begin{exercise}Detectability and observability canonical forms.\\
 \end{exercise}
 \begin{answer}
-
+This is the dual of answer 19. Only need to transpose the matrix.
 \end{answer}
 
 
+\begin{exercise}Estimator stability and detectable systems.\\
+\end{exercise}
+\begin{answer}
+From the perspective of observability canonical form, the observable state still satisfies Lemma 1.6. And it is obvious that the norm of unobservable state is controlled by the norm of observable, so the estimator is stable. (By the way, it seems that there is no definition of estimator stability.)
+\end{answer}
 
 
+\begin{exercise}Estimator stability and semidefinite state noise penalty.\\
+\end{exercise}
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item Because $Q$ is positive semidefinite, $Q=M^\top M,~M\in \mathbb{R}^{\text{rank}(Q)\times n}$, where $M$ has full rank. So $G=M^\top,~\tilde Q=MM^\top$.
+    Perform a invertible transformation on the system so that only the first $\text{rank}(Q)$ column of $B$ is non-zero, then delete all zero columns of $B$ and delete the corresponding control input. Transform the system back and get $G\in \mathbb{R}^{n\times \text{rank}(Q)},\tilde Q=G^\top G\in \mathbb{R}^{\text{rank}(Q)\times \text{rank}(Q)}$.
+    \item The noise is not independent, but linearly correlated.
+    \item This is obvious from the way G is constructed in the first question.
+    \item The difference between this question and Exercise 1.32 is that here $(A,G)$ is stabilizable. For uncontrollable modes, as time increases, it will converge to zero, so the error is bounded. For controllable modes, that does not satisfy the system equation cannot increase the norm of $w$, so the term w in the objective function is zero only when the system equation is satisfied, so the estimator will not be unstable.
+    \item The estimator will be unstable and the state may diverge.
+\end{enumerate}
+\end{answer}
 
 
+\begin{exercise}Calculating mean and variance form data.\\
+\end{exercise}
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item We know that 
+    \begin{equation}
+        \mathbb{E}\hat x=\mathbb{E}\dfrac{1}{N} \sum^N_k x_k=\dfrac{1}{N} \sum^N_k \mathbb{E}x_k=\mathbb{E}x
+    \end{equation}
+    \item We know that 
+    \begin{align}
+        \mathbb{E}\hat P
+        &=\dfrac{1}{N}\mathbb{E}\sum^N_k\left(x_k-\dfrac{1}{N} \sum^N_k x_k\right)^2\\
+        &=\dfrac{1}{N}\mathbb{E}\sum^N_k x_k^2
+        +\mathbb{E}\sum^N_k\left(\dfrac{1}{N} \sum^N_k x_k\right)^2
+        -\dfrac{2}{N}\mathbb{E}\sum^N_k\left(x_k\dfrac{1}{N} \sum^N_k x_k\right)^2\\
+        &=\dfrac{N-1}{N}\mathbb{E}\sum^N_k\left(\mathbb{E}x-\dfrac{1}{N} \sum^N_k x_k\right)^2\\
+        &=\dfrac{N-1}{N}P
+    \end{align}
+    \item the unbiased estimate is
+    \begin{align}
+        \hat P
+        &=\dfrac{N}{N-1}\sum^N_k\left(x_k-\dfrac{1}{N} \sum^N_k x_k\right)^2
+    \end{align}
+    \item $N\ge 100$.
+\end{enumerate}
+\end{answer}
+
+
+\begin{exercise}Expected sum of squares.\\
+\end{exercise}
+\begin{answer}
+We focus on one of the quadratic summation terms
+\begin{equation}
+    \mathbb{E}(x_i x_j q_{ij})
+    =q_{ij}\mathbb{E}(x_i x_j)
+    =q_{ij}\left(\mathbb{E}(x_i)\mathbb{E}(x_j)+\text{Cov}(x_i,x_j)\right)
+    =q_{ij} m_i m_j+q_{ij} p_{ij}
+\end{equation}
+And if we resum, we get what we want to prove.
+\end{answer}
+
+
+\begin{exercise}Normal distribution.\\
+\end{exercise}
+\begin{answer}
+    We just have to prove that the standard normal distribution has zero mean and one variance, and the formula we want to prove in this case can be given by a linear transformation of the random variable. The symmetry of the function tells us that the mean is zero, and the variance is calculated by multiplying two identical integrals together and using polar transformations. It can also be calculated using parametric integrals. Obviously, the maximum point is taken at the mean, using what we learned about function monotonicity.
+\end{answer}
+
+
+\begin{exercise}Conditional densities are positive definite.\\
+\end{exercise}
+\begin{answer}
+    Since the submatrices of a positive definite matrix are also positive definite, the first two terms hold. By Schur's complement, the last two terms are equivalent to $P$ positive definite.
+\end{answer}
+
+
+\begin{exercise}Expectation and covariance under linear transformations.
+\end{exercise}
+\begin{answer}
+\begin{equation}
+    \mathbb{E}Cx=C\mathbb{E}x=Cm_x
+\end{equation}
+\begin{equation}
+    \text{Cov}(x)=\mathbb{EC}x x^\top C^\top -(\mathbb{E}Cx) (\mathbb{E}xC)^\top= Cm_x m_x^\top C^\top + CP_x C^\top- C m_x m_x^\top C^\top =CP_x C^\top
+\end{equation}
+\end{answer}
+
+
+\begin{exercise}Normal distributions under linear transformations.\\    
+\end{exercise}
+\begin{answer}
+    See Exercise 1.41.
+\end{answer}
+
+\begin{exercise}More on normals and linear transformations.\\
+\end{exercise}
+\begin{answer}
+    First we prove that for random vector $X = \mu + BZ \in \mathbb{R}^{n}$, where $B$ is full rank. And the elements of random vector $Z$ is i.i.d., and is standard normal distribution. let $\Sigma = BB^{\top}$, then the PDF of $X$ is
+
+    \[f(x) = \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}e^{- \frac{1}{2}(x - \mu)^{\top}\Sigma^{- 1}(x - \mu)}\]
+    
+    Because B is full rank, the inverse transformation of\(x \rightarrow \mu + Bx\ \) is \(\ x \rightarrow B^{- 1}(x - \mu)\ \), and the determinant of Jacobian is \(\ \left| B^{- 1} \right|\). By probability density transformation formula of multivariate random variable
+    
+    \begin{align}
+        g(x) &= f\left( \left( B^{\top} \right)^{- 1}(x - \mu) \right)\| B^{- 1} \|\\
+        &= f\left( \left( B^{\top} \right)^{- 1}(x - \mu) \right)|\Sigma|^{- \frac{1}{2}}\\
+        &= \frac{1}{(2\pi)^{n/2}|\Sigma|^{1/2}}e^{- \frac{1}{2}(x - \mu)^{\top}\Sigma^{- 1}(x - \mu)}
+    \end{align}
+
+    
+    where \(\ f(x) = (2\pi)^{- n/2}e^{- x^{\top}x}\ \) is the PDF of \(\ Z\ \). And \(X \sim N(\mu,BB^{\top})\).
+    
+    If A is a full rank square matrix, \(Y = AX + b = ABZ + A\mu + b \sim N(A\mu + b,ABB^{\top}A^{\top})\), its PDF
+    
+    \[h(x) = \frac{1}{(2\pi)^{n/2}\left| A\Sigma A^{\top} \right|^{1/2}}e^{- \frac{1}{2}(x - A\mu - b)^{\top}{(A\Sigma A^{\top})}^{- 1}(x - A\mu - b)}\]
+    
+    If A is a row full rank matrix of $m$ rows, Supplement \( AB \) with \( Q \) orthogonal to the row of \( AB \). And make it a full rank square matrix, Use 0 to supplement lines A and b
+    
+    \[\overline{AB} = \begin{pmatrix}
+    AB \\
+    Q \\
+    \end{pmatrix} \in \mathbb{R}^{n \times n},\ \ \ \overline{b} = \begin{pmatrix}
+    b \\
+    0 \\
+    \end{pmatrix} \in \mathbb{R}^{n},\ \ \ ABQ^{\top} = 0,\ \ \ \overline{A} = \begin{pmatrix}
+    A \\
+    Q \\
+    \end{pmatrix} \in \mathbb{R}^{n \times n}\]
+    
+    the PDF of \(\ \overline{Y} = \overline{AB}Z + \overline{A}\mu + \overline{b}\ \) is
+    
+    \[\overline{h}(x) = \frac{1}{(2\pi)^{n/2}\left| \overline{AB}\left( \overline{AB} \right)^{\top} \right|^{1/2}}e^{- \frac{1}{2}\left( x - \overline{A}\mu - \overline{b} \right)^{\top}\left( \overline{AB}\left( \overline{AB} \right)^{\top} \right)^{- 1}\left( x - \overline{A}\mu - \overline{b} \right)}\]
+    
+    So the PDF of \(\ Y\ \) is
+    
+    \begin{align*}
+    h(x) &= \int_{x_{m + 1},\cdots,x_{n}}^{}{\frac{1}{(2\pi)^{n/2}\left| \overline{AB}\left( \overline{AB} \right)^{\top} \right|^{1/2}}e^{- \frac{1}{2}\left( x - \overline{A}\mu - \overline{b} \right)^{\top}\left( \overline{AB}\left( \overline{AB} \right)^{\top} \right)^{- 1}\left( x - \overline{A}\mu - \overline{b} \right)}}dx\\
+    &= \frac{1}{(2\pi)^{m/2}\left| A\Sigma A^{\top} \right|^{1/2}}e^{- \frac{1}{2}(x - A\mu - b)^{\top}{(A\Sigma A^{\top})}^{- 1}(x - A\mu - b)}
+    \end{align*}
+    
+    This is because
+    
+    \[\int_{y}^{}{\frac{1}{(2\pi)^{(n - m)/2}\left| QQ^{\top} \right|^{1/2}}e^{- \frac{1}{2}y^{\top}\left( QQ^{\top} \right)^{- 1}y}}dx = 1,\ \ \ y = \left\lbrack x_{m + 1},\cdots,x_{n} \right\rbrack^{\top}\]
+    
+    Further, if the first m rows of A are full rank, and the last k row is 0, then its PDF
+    
+    \[h(x) = \frac{\delta(x_{i} = b_{i},i = m + 1,\cdots,n)}{(2\pi)^{m/2}\left| A\Sigma A^{\top} \right|^{1/2}}e^{- \frac{1}{2}(x - A\mu - b)^{\top}{(A\Sigma A^{\top})}^{- 1}(x - A\mu - b)}\]
+    
+    If the rank of non row full rank matrix $A$ is $m$, then there is an orthogonal matrix Q so that the first $m$ rows of $QA$ are full rank, and the last $k$ row is 0, that is, the PDF of \( Z=QY=QAX+Qb \) is:
+    
+    \[l(x) = \frac{\delta(x_{i} = (Qb)_{i},i = m + 1,\cdots,n)}{(2\pi)^{m/2}\left| QA\Sigma{(QA)}^{\top} \right|^{1/2}}e^{- \frac{1}{2}(x - QA\mu - Qb)^{\top}\left( QA\Sigma(QA)^{\top} \right)^{- 1}(x - QA\mu - Qb)}\]
+    
+    where \(\delta( \cdot )\ \) is a characteristic function. So the PDF of \( Y=Q ^ {- 1} Z \) is
+    
+    \[\frac{\delta({(Qx)}_{i} = (Qb)_{i},i = m + 1,\cdots,n)}{(2\pi)^{m/2}\left| QA\Sigma{(QA)}^{\top} \right|^{1/2}}e^{- \frac{1}{2}(Qx - QA\mu - Qb)^{\top}\left( QA\Sigma(QA)^{\top} \right)^{- 1}(Qx - QA\mu - Qb)}\]
+    
+    For a matrix with non full rank, it cannot be directly transformed because it leads to a positive semi definite covariance matrix, which is not allowed.
+\end{answer}
+
+
+\begin{exercise}Signal processing in the good old days -- recursive least squares.\\
+\end{exercise}
+\begin{answer}
+    The iteration formula is 
+    \begin{align}
+        L&\leftarrow L+x^\top x,\quad L_0=P^{-1}+X^\top X\\
+        R&\leftarrow L+x^\top y,\quad R_0=X^\top Y +P^{-1}\theta\\
+        \hat\theta &\leftarrow L^{-1}R
+    \end{align}
+    By solving the optimization problem, this iterative method is obviously consistent with the solution with all the measurements.
+\end{answer}
+
+
+\begin{exercise}Least square parameter estimation and Bayesian estimation.\\
+\end{exercise}
+\begin{answer}
+\begin{enumerate}[label=(\alph*)]
+    \item $\hat\theta=(X^\top R X)^{-1}X^\top R(X\theta+e)$, so $\mathbb{E}~\hat\theta=(X^\top X)^{-1}X^\top(X\theta)=\theta$, and $\text{Cov}~\hat\theta=(X^\top X)^{-1}X^\top R X (X^\top X)^{-1}=\sigma^2 (X^\top X)^{-1}$.
+    \item $p(\theta|y)=C p(y|\theta) p(\theta)$, where $p(y|\theta)$ is the PDF of $\mathcal{N}(X\theta,R)$. So this density is also normal too. The mean is $(X^\top X/\sigma^2 +\bar P^{-1})^{-1}(X^\top y/\sigma^2+\bar P^{-1}\bar\theta)$, the variance is $(X^\top X/\sigma^2 +\bar P^{-1})^{-1}$.
+    \item If $\bar P^{-1}\rightarrow 0$, $m\rightarrow (X^\top X)^{-1}X^\top y$, $P\rightarrow \sigma^2 (X^\top X)^{-1}$.
+    \item see (a). Different from (a), the weight of quadratic form here is $R$.
+    \item see (a).
+    \item $p(\theta|y)=C p(y|\theta) p(\theta)$, where $p(y|\theta)$ is the PDF of $\mathcal{N}(X\theta,R)$. So this density is also normal too. The mean is $(X^\top R X +\bar P^{-1})^{-1}(X^\top R y/\sigma^2+\bar P^{-1}\bar\theta)$, the variance is $(X^\top R X/\sigma^2 +\bar P^{-1})^{-1}$.
+\end{enumerate}
+\end{answer}
+
+
+\begin{exercise}Least square and minimum varience estimation.\\
+\end{exercise}
+\begin{answer}
+    
+\end{answer}
 
 
 
