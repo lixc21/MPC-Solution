@@ -1074,12 +1074,12 @@ And if we resum, we get what we want to prove.
 \end{exercise}
 \begin{answer}
 \begin{enumerate}[label=(\alph*)]
-    \item $\hat\theta=(X^\top R X)^{-1}X^\top R(X\theta+e)$, so $\mathbb{E}~\hat\theta=(X^\top X)^{-1}X^\top(X\theta)=\theta$, and $\text{Cov}~\hat\theta=(X^\top X)^{-1}X^\top R X (X^\top X)^{-1}=\sigma^2 (X^\top X)^{-1}$.
+    \item $\hat\theta=(X^\top R^{-1} X)^{-1}X^\top R^{-1}(X\theta+e)$, so $\mathbb{E}~\hat\theta=(X^\top X)^{-1}X^\top(X\theta)=\theta$, and $\text{Cov}~\hat\theta=(X^\top R^{-1} X)^{-1}X^\top R^{-1} X (X^\top R^{-1} X)^{-1}=\sigma^2 (X^\top X)^{-1}$.
     \item $p(\theta|y)=C p(y|\theta) p(\theta)$, where $p(y|\theta)$ is the PDF of $\mathcal{N}(X\theta,R)$. So this density is also normal too. The mean is $(X^\top X/\sigma^2 +\bar P^{-1})^{-1}(X^\top y/\sigma^2+\bar P^{-1}\bar\theta)$, the variance is $(X^\top X/\sigma^2 +\bar P^{-1})^{-1}$.
     \item If $\bar P^{-1}\rightarrow 0$, $m\rightarrow (X^\top X)^{-1}X^\top y$, $P\rightarrow \sigma^2 (X^\top X)^{-1}$.
     \item see (a). Different from (a), the weight of quadratic form here is $R$.
     \item see (a).
-    \item $p(\theta|y)=C p(y|\theta) p(\theta)$, where $p(y|\theta)$ is the PDF of $\mathcal{N}(X\theta,R)$. So this density is also normal too. The mean is $(X^\top R X +\bar P^{-1})^{-1}(X^\top R y/\sigma^2+\bar P^{-1}\bar\theta)$, the variance is $(X^\top R X/\sigma^2 +\bar P^{-1})^{-1}$.
+    \item $p(\theta|y)=C p(y|\theta) p(\theta)$, where $p(y|\theta)$ is the PDF of $\mathcal{N}(X\theta,R)$. So this density is also normal too. The mean is $(X^\top R^{-1} X +\bar P^{-1})^{-1}(X^\top R^{-1} y/\sigma^2+\bar P^{-1}\bar\theta)$, the variance is $(X^\top R^{-1} X/\sigma^2 +\bar P^{-1})^{-1}$.
 \end{enumerate}
 \end{answer}
 
@@ -1087,7 +1087,7 @@ And if we resum, we get what we want to prove.
 \begin{exercise}Least square and minimum varience estimation.\\
 \end{exercise}
 \begin{answer}
-    
+    Only need to prove $K RK^\top \geq (X^\top R^{-1} X)^{-1}$, for all $KX=I$. It is obvious.
 \end{answer}
 
 
